@@ -30,7 +30,7 @@ try:
 except ImportError:
     from distutils.core import setup, Extension
 
-version = "0.6.1"
+version = "0.6.3"
 long_description = """
 Python bindings for the snappy compression library from Google.
 
