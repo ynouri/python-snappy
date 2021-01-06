@@ -24,12 +24,13 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import sys
+
 try:
     from setuptools import setup, Extension
 except ImportError:
     from distutils.core import setup, Extension
 
-version = '0.5.4'
+version = "0.6.1"
 long_description = """
 Python bindings for the snappy compression library from Google.
 
@@ -37,53 +38,57 @@ More details about Snappy library: http://google.github.io/snappy
 """
 
 
-snappymodule = Extension('snappy._snappy',
-                         libraries=['snappy'],
-                         sources=['snappy/snappymodule.cc', 'snappy/crc32c.c'])
+snappymodule = Extension(
+    "snappy._snappy",
+    libraries=["snappy"],
+    sources=["snappy/snappymodule.cc", "snappy/crc32c.c"],
+)
 
 ext_modules = [snappymodule]
-packages = ['snappy']
+packages = ["snappy"]
 install_requires = []
 setup_requires = []
 cffi_modules = []
 
-if 'PyPy' in sys.version:
+if "PyPy" in sys.version:
     from setuptools import setup
+
     ext_modules = []
-    install_requires = ['cffi>=1.0.0']
-    setup_requires = ['cffi>=1.0.0']
-    cffi_modules = ['./snappy/snappy_cffi_builder.py:ffi']
+    install_requires = ["cffi>=1.0.0"]
+    setup_requires = ["cffi>=1.0.0"]
+    cffi_modules = ["./snappy/snappy_cffi_builder.py:ffi"]
 
 setup(
-    name='python-snappy',
+    name="python-snappy",
     version=version,
-    author='Andres Moreira',
-    author_email='andres@andresmoreira.com',
-    url='http://github.com/andrix/python-snappy',
-    description='Python library for the snappy compression library from Google',
+    author="Andres Moreira",
+    author_email="andres@andresmoreira.com",
+    url="http://github.com/andrix/python-snappy",
+    description="Python library for the snappy compression library from Google",
     long_description=long_description,
-    keywords='snappy, compression, google',
-    license='BSD',
-    classifiers=['Development Status :: 4 - Beta',
-                 'Topic :: Internet',
-                 'Topic :: Software Development',
-                 'Topic :: Software Development :: Libraries',
-                 'Topic :: System :: Archiving :: Compression',
-                 'License :: OSI Approved :: BSD License',
-                 'Intended Audience :: Developers',
-                 'Intended Audience :: System Administrators',
-                 'Operating System :: MacOS :: MacOS X',
-                 # 'Operating System :: Microsoft :: Windows', -- Not tested yet
-                 'Operating System :: POSIX',
-                 'Programming Language :: Python :: 2.7',
-                 'Programming Language :: Python :: 3',
-                 'Programming Language :: Python :: 3.5',
-                 'Programming Language :: Python :: 3.6',
-                 'Programming Language :: Python :: 3.7',
-                 ],
+    keywords="snappy, compression, google",
+    license="BSD",
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Topic :: Internet",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: System :: Archiving :: Compression",
+        "License :: OSI Approved :: BSD License",
+        "Intended Audience :: Developers",
+        "Intended Audience :: System Administrators",
+        "Operating System :: MacOS :: MacOS X",
+        # 'Operating System :: Microsoft :: Windows', -- Not tested yet
+        "Operating System :: POSIX",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
     ext_modules=ext_modules,
     packages=packages,
     install_requires=install_requires,
     setup_requires=setup_requires,
-    cffi_modules=cffi_modules
+    cffi_modules=cffi_modules,
 )
